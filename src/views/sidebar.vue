@@ -43,8 +43,19 @@
           <li>
             <router-link to="/example05-02">基于执行方法</router-link>
           </li>
+        </ul>
+      </li>
+      <li>
+        Vuex
+        <ul>
           <li>
-            <router-link to="/example05-03"></router-link>
+            <router-link to="/example06-01">基本绑定</router-link>
+          </li>
+          <li>
+            <router-link to="/example06-02">同步更新</router-link>
+          </li>
+          <li>
+            <router-link to="/example06-03">异步更新</router-link>
           </li>
         </ul>
       </li>
