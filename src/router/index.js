@@ -20,6 +20,18 @@ const routes = [
     props: true,
     path: "/example03/students/:sid/homeworks/:hid",
     component: () => import("@/views/example03/Example03.vue")
+  },
+  {
+    path: "/example04-01",
+    component: () => import("@/views/example04/Example04-01.vue")
+  },
+  {
+    path: "/example04-02",
+    component: () => import("@/views/example04/Example04-02.vue")
+  },
+  {
+    path: "/example04-03",
+    component: () => import("@/views/example04/Example04-03.vue")
   }
 ];
 

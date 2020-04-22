@@ -20,6 +20,20 @@
           </li>
         </ul>
       </li>
+      <li>
+        基本指令
+        <ul>
+          <li>
+            <router-link to="/example04-01">v-text v-if v-show</router-link>
+          </li>
+          <li>
+            <router-link to="/example04-02">v-bind</router-link>
+          </li>
+          <li>
+            <router-link to="/example04-03">v-for</router-link>
+          </li>
+        </ul>
+      </li>
     </ul>
   </div>
 </template>
