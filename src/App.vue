@@ -2,8 +2,11 @@
   <div id="app">
     <!-- 自动创建标签 -->
     <sidebar id="sidebar" />
+    <!-- 添加 -->
+    <!-- <keep-alive> -->
     <!-- 渲染匹配到的试图组件 -->
-    <router-view id="router-view" />
+    <router-view id="router" :key="$route.path" />
+    <!-- </keep-alive> -->
   </div>
 </template>
 
@@ -22,7 +25,6 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  margin-top: 20px;
 }
 
 /* vue的组件直接使用是不可以的，因为不是html原生的标签 */
@@ -35,13 +37,11 @@ export default {
   margin-top: 10px;
   display: flex;
 }
-
 #sidebar {
   width: 300px;
   border: 1px solid red;
 }
-
-#router-view {
+#router {
   border: 1px solid red;
   flex: 1;
 }

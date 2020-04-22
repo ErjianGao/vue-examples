@@ -12,8 +12,14 @@ const routes = [
     component: () => import("@/views/example01/Example01.vue")
   },
   {
-    path:"/example02",
+    path: "/example02",
     component: () => import("@/views/example02/Example02.vue")
+  },
+  {
+    // 允许把路由的参数进行值传递
+    props: true,
+    path: "/example03/students/:sid/homeworks/:hid",
+    component: () => import("@/views/example03/Example03.vue")
   }
 ];
 
