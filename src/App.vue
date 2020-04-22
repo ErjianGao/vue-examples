@@ -31,15 +31,18 @@ export default {
   display: inline-block;
 } */
 
+#app {
+  margin-top: 10px;
+  display: flex;
+}
+
 #sidebar {
   width: 300px;
-  display: inline-block;
   border: 1px solid red;
-  vertical-align: top;
 }
 
 #router-view {
-  display: inline-block;
   border: 1px solid red;
+  flex: 1;
 }
 </style>
