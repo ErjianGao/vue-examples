@@ -1,28 +1,22 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 
+// 引入vueRouter
 Vue.use(VueRouter);
 
+// 路由的规则
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    // 路径为根的时候加载某个组件，此时为非延迟加载
+    path: "/example01",
+    component: () => import("@/views/example01/Example01.vue")
   }
 ];
 
 const router = new VueRouter({
+  // 基于参数创建
   routes
 });
 
+// 对外暴露对象，当外界import时，将router对象返回
 export default router;
