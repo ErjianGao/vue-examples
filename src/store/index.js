@@ -25,7 +25,7 @@ const myActions = {
     setTimeout(() => {
       // 内部仍需通过同步更新state
       commit(types.UPDATE_USER, data);
-    }, 5000);
+    }, 2000);
   }
 };
 

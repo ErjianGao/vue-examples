@@ -4,6 +4,10 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+// 只有当开发环境时才会import mock模块，
+if (process.env.NODE_ENV == "development") {
+  import("@/mock/index.js");
+}
 
 Vue.config.productionTip = false;
 

@@ -25,10 +25,14 @@ export default {
   methods: {
     change() {
       // 同步方法，向哪一事件发送通知，激活事件
-      this.$store.commit(UPDATE_USER, this.myUser);
+      this.$store.commit(UPDATE_USER, {
+        name: this.myUser.name,
+        address: this.myUser.address
+      });
     }
   },
   computed: {
+    // 里面放的是属性,mapState是方法
     ...mapState(["user"])
   }
 };

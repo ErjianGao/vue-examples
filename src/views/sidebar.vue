@@ -59,6 +59,17 @@
           </li>
         </ul>
       </li>
+      <li>
+        axios & mock & Vuex
+        <ul>
+          <li>
+            <router-link to="/example07-01">基本请求及mock数据</router-link>
+          </li>
+          <li>
+            <router-link to="/homeworks">homeworks</router-link>
+          </li>
+        </ul>
+      </li>
     </ul>
   </div>
 </template>

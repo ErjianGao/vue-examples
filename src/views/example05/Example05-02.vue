@@ -8,6 +8,7 @@
         <input type="checkbox" v-model="agreed" />
       </label>
       <br />
+      <!-- template没有任何样式 -->
       <template v-for="(c, index) in courses">
         <label :key="`l-${index}`">
           <!-- 双向绑定自动完成选中，通过reference属性可以拿到所有有ref属性的元素 -->
