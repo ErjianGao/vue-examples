@@ -36,17 +36,50 @@ mock.onGet(path("/users/{uid}/homework/{hid}")).reply(200, {
   }
 });
 
-// axios的config对象，包含请求信息
-// 返回一个数组 [status, {data对象}, {header对象}]
-mock.onPost("/login").reply(config => {
-  console.log(config);
-  // 此时请求的json以及转为字符串，不是json对象，因此需要转换
-  let data = JSON.parse(config.data);
-  console.log(data.user);
+// // axios的config对象，包含请求信息
+// // 返回一个数组 [status, {data对象}, {header对象}]
+// mock.onPost("/login").reply(config => {
+//   console.log(config);
+//   // 此时请求的json以及转为字符串，不是json对象，因此需要转换
+//   let data = JSON.parse(config.data);
+//   console.log(data.user);
 
-  return [
-    200,
-    { user: { userId: 333, userName: "gao" } },
-    { Authorization: "16513212316" }
-  ];
+//   return [
+//     200,
+//     { user: { userId: 333, userName: "gao" } },
+//     { Authorization: "16513212316" }
+//   ];
+// });
+
+// vuex与axios与mock整合学习
+mock.onGet(path("/homeworks")).reply(200, {
+  homeworks: [
+    { id: 1, name: "Java基本数据类型", deadline: "2019-04-10T09:00" },
+    { id: 2, name: "Java封装", deadline: "2019-05-10T12:00" },
+    { id: 3, name: "Java泛型", deadline: "2019-06-10T21:30" }
+  ]
+});
+
+mock.onGet(path("/homeworks/{hid}")).reply(200, {
+  homework: { id: 1, name: "Java基本数据类型", deadline: "2019-04-10T09:00" }
+});
+
+// 处理复杂的config可以利用箭头函数
+mock.onPost(path("/login")).reply(config => {
+  let data = config.data;
+  let user = JSON.parse(data);
+  // 如果不正确
+  let result = [401, { message: "用户名密码错误" }];
+  if (user.userName == "1001" && user.password == "123456") {
+    result = [
+      200,
+      {
+        role: "user"
+      },
+      {
+        Authorization: "321613"
+      }
+    ];
+  }
+  return result;
 });

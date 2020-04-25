@@ -70,6 +70,12 @@
           </li>
         </ul>
       </li>
+      <li>
+        <router-link to="/example08-01">父组件向子组件传参</router-link>
+      </li>
+      <li>
+        <router-link to="/example09-01">Axios拦截器</router-link>
+      </li>
     </ul>
   </div>
 </template>

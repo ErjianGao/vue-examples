@@ -7,16 +7,20 @@
     <!-- 渲染匹配到的试图组件 -->
     <router-view id="router" :key="$route.path" />
     <!-- </keep-alive> -->
+    <alertdialog />
   </div>
 </template>
 
 <!-- 把另一个组件引入 -->
 <script>
 // 声明组件
-import sidebar from "@/views/sidebar";
+import sidebar from "@/views/Sidebar";
 export default {
-  // 非延迟加载
-  components: { sidebar }
+  // sidebar非延迟加载，altertdialog为延迟加载
+  components: {
+    sidebar,
+    alertdialog: () => import("@/components/AlertDialog.vue")
+  }
 };
 </script>
 
