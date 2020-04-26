@@ -74,6 +74,24 @@ const routes = [
   {
     path: "/example09-01",
     component: () => import("@/views/example09/Example09-01.vue")
+  },
+  {
+    props: true,
+    path: "/example10",
+    component: () => import("@/views/example10/Example10-01.vue"),
+
+    children: [
+      {
+        // 这里不能加 /
+        path: "homeworks/:hid",
+        components: {
+          default: () => import("@/views/example10/Homework.vue"),
+          subComponent: () => import("@/views/example10/SubComponent.vue")
+        },
+        props: { default: true, subComponent: true }
+        // component: () => import("@/views/example10/Homework.vue")
+      }
+    ]
   }
 ];
 

@@ -25,7 +25,7 @@ const myMutations = {
     state.homeworks = data;
   },
   [types.GET_HOMEWORK](state, data) {
-    console.log(data);
+    // console.log(data);
     state.homework = data;
   },
   [types.GET_EXCEPTION](state, data) {
@@ -51,13 +51,12 @@ const myActions = {
   async [types.GET_HOMEWORK]({ commit }, data) {
     console.log(data.hid);
     // 模板字符串可以拿到变量
-    let resp = await axios.get(`/homeworks/${data.hid}`);
-    console.log(resp.data.homework);
-    console.log(types.GET_HOMEWORK);
+    let resp = await axios.get(`/example10/homeworks/${data.hid}`);
+    console.log(resp);
 
     // 更新到state
     commit(types.GET_HOMEWORK, resp.data.homework);
-    console.log(myState.homework);
+    // console.log(myState.homework);
   },
   // async [types.GET_HOMEWORK]({ commit }, data) {
   //   // 模板字符串可以拿到变量
@@ -66,12 +65,17 @@ const myActions = {
   //   return new Promise.resolve(resp.data.homeworks);
   // }
 
+  // async [types.LOGIN]({ commit }, data) {
+  //   // 如果失败的话resp拿不到任何结果
+  //   let resp = await axios.post("/login", {
+  //     userName: data.userName,
+  //     password: data.password
+  //   });
+  // }
+
+  // 登录，并添加sessionStorage
   async [types.LOGIN]({ commit }, data) {
-    // 如果失败的话resp拿不到任何结果
-    let resp = await axios.post("/login", {
-      userName: data.userName,
-      password: data.password
-    });
+    let resp = await axios.post("");
   }
 };
 

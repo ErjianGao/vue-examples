@@ -2,7 +2,7 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
 // 所有的请求都是200ms
-let mock = new MockAdapter(axios, { delayResponse: 200 });
+let mock = new MockAdapter(axios, { delayResponse: 0 });
 
 // 通用的，将{}占位符的字符串路径，转为正则表达式对象
 // 例如，/users/{uid}; /users/{uid}/homeworks/{hid}
@@ -51,17 +51,38 @@ mock.onGet(path("/users/{uid}/homework/{hid}")).reply(200, {
 //   ];
 // });
 
-// vuex与axios与mock整合学习
-mock.onGet(path("/homeworks")).reply(200, {
-  homeworks: [
-    { id: 1, name: "Java基本数据类型", deadline: "2019-04-10T09:00" },
-    { id: 2, name: "Java封装", deadline: "2019-05-10T12:00" },
-    { id: 3, name: "Java泛型", deadline: "2019-06-10T21:30" }
-  ]
+// // vuex与axios与mock整合学习
+// mock.onGet(path("/homeworks")).reply(200, {
+//   homeworks: homeworks
+// });
+
+mock.onGet(path("/homeworks")).reply(c => {
+  return [
+    200,
+    {
+      // 注意这里只能用返回值传递
+      homeworks: homeworks
+    }
+  ];
 });
 
-mock.onGet(path("/homeworks/{hid}")).reply(200, {
-  homework: { id: 1, name: "Java基本数据类型", deadline: "2019-04-10T09:00" }
+// mock.onGet(path("/homeworks/{hid}")).reply(200, {
+//   homework: { id: 1, name: "Java基本数据类型", deadline: "2019-04-10T09:00" }
+// });
+
+mock.onGet(path("homeworks/{hid}")).reply(c => {
+  let reg = /homeworks\/(\d+)/;
+  console.log(c);
+
+  // 拿到hid参数
+  let hid = c.url.match(reg)[1];
+  console.log(hid);
+  return [
+    200,
+    {
+      homework: homeworks.find(h => h.id == hid)
+    }
+  ];
 });
 
 // 处理复杂的config可以利用箭头函数
@@ -83,3 +104,10 @@ mock.onPost(path("/login")).reply(config => {
   }
   return result;
 });
+
+//========================
+const homeworks = [
+  { id: 1, name: "Java基本数据类型", deadline: "2019-04-10T09:00" },
+  { id: 2, name: "Java封装", deadline: "2019-05-10T12:00" },
+  { id: 3, name: "Java泛型", deadline: "2019-06-10T21:30" }
+];
