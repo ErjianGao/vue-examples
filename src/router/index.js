@@ -92,6 +92,10 @@ const routes = [
         // component: () => import("@/views/example10/Homework.vue")
       }
     ]
+  },
+  {
+    path: "/example11-01",
+    component: () => import("@/views/example11/Example11-01.vue")
   }
 ];
 
@@ -99,6 +103,43 @@ const router = new VueRouter({
   // 基于参数创建
   routes
 });
+// 以上为没有角色要求的默认路由
+// ==============================
+// 后期追加的路由配置
+let studentRouter = [
+  {
+    props: true,
+    path: "/example11-01/welcome",
+    component: () => import("@/views/example11/Welcome.vue")
+  }
+];
+
+let teacherRouter = [
+  {
+    props: true,
+    path: "/example11-01/welcome",
+    component: () => import("@/views/example11/Welcome.vue")
+  }
+];
+
+const teacherRole = "teacher";
+const studentRole = "student";
+
+// 暴露该方法，登录后，有vuex调用，通知更新路由信息
+export function updateRoutes() {
+  switch (sessionStorage.getItem("role")) {
+    case teacherRole:
+      // 添加路由
+      router.addRoutes(teacherRouter);
+      break;
+    case studentRole:
+      router.addRoutes(studentRouter);
+      break;
+  }
+}
 
 // 对外暴露对象，当外界import时，将router对象返回
 export default router;
+
+// 在文件模块加载时也执行
+updateRoutes();

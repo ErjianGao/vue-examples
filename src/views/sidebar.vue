@@ -79,6 +79,9 @@
       <li>
         <router-link to="/example10">嵌套路由</router-link>
       </li>
+      <li>
+        <router-link to="/example11-01">routes</router-link>
+      </li>
     </ul>
   </div>
 </template>

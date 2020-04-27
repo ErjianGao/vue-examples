@@ -1,5 +1,6 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
+import { AUTHORIZATION } from "@/store/types";
 
 // 所有的请求都是200ms
 let mock = new MockAdapter(axios, { delayResponse: 0 });
@@ -86,21 +87,63 @@ mock.onGet(path("homeworks/{hid}")).reply(c => {
 });
 
 // 处理复杂的config可以利用箭头函数
-mock.onPost(path("/login")).reply(config => {
-  let data = config.data;
-  let user = JSON.parse(data);
+mock.onPost(path("login")).reply(config => {
+  console.log("mock");
+  console.log(config);
+
+  let data = JSON.parse(config.data);
+  let user = data.user;
+  console.log("mock");
+
+  console.log(data);
+
   // 如果不正确
   let result = [401, { message: "用户名密码错误" }];
   if (user.userName == "1001" && user.password == "123456") {
+    console.log(3);
+
     result = [
       200,
       {
-        role: "user"
+        // 设置角色
+        role: "student"
       },
       {
         Authorization: "321613"
       }
     ];
+  }
+  return result;
+});
+
+// 模拟加密的token被篡改
+mock.onGet(path("index")).reply(c => {
+  console.log(1);
+
+  let result = [403, { message: "无权限" }];
+  let auth = c.headers[AUTHORIZATION];
+  if (auth == "321613") {
+    result = [
+      200,
+      {
+        name: "GAO"
+      }
+    ];
+  }
+  return result;
+});
+
+mock.onGet(path("welcome")).reply(c => {
+  console.log("mock");
+
+  let result = [400, { message: "" }];
+  console.log(c);
+
+  let role = c.headers["role"];
+  console.log(role);
+
+  if (role != null) {
+    result = [200, { role: role }];
   }
   return result;
 });
