@@ -2,6 +2,12 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { AUTHORIZATION } from "@/store/types";
 
+const homeworks = [
+  { id: 1, name: "Java基本数据类型", deadline: "2019-04-10T09:00" },
+  { id: 2, name: "Java封装", deadline: "2019-05-10T12:00" },
+  { id: 3, name: "Java泛型", deadline: "2019-06-10T21:30" }
+];
+
 // 所有的请求都是200ms
 let mock = new MockAdapter(axios, { delayResponse: 0 });
 
@@ -52,12 +58,13 @@ mock.onGet(path("/users/{uid}/homework/{hid}")).reply(200, {
 //   ];
 // });
 
-// // vuex与axios与mock整合学习
+// vuex与axios与mock整合学习
 // mock.onGet(path("/homeworks")).reply(200, {
 //   homeworks: homeworks
 // });
 
 mock.onGet(path("/homeworks")).reply(c => {
+  // reply是一个回调函数，所以写在最后的homework可以加载出来
   return [
     200,
     {
@@ -149,8 +156,3 @@ mock.onGet(path("welcome")).reply(c => {
 });
 
 //========================
-const homeworks = [
-  { id: 1, name: "Java基本数据类型", deadline: "2019-04-10T09:00" },
-  { id: 2, name: "Java封装", deadline: "2019-05-10T12:00" },
-  { id: 3, name: "Java泛型", deadline: "2019-06-10T21:30" }
-];

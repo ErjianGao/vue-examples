@@ -7,6 +7,7 @@ import { updateRoutes } from "@/router/index";
 Vue.use(Vuex);
 
 const myState = {
+  message: "",
   exception: {},
   name: null,
   role: null,
@@ -45,6 +46,9 @@ const myMutations = {
   },
   welcome(state, data) {
     state.role = data;
+  },
+  admin(state, data) {
+    state.message = data;
   }
 };
 
@@ -121,6 +125,11 @@ const myActions = {
 
     let resp = await axios.get("welcome");
     commit("welcome", resp.data.role);
+  },
+  async admin({ commit }, data) {
+    let resp = await axios.get("/admin");
+    console.log(resp);
+    commit("admin", resp.data.msg);
   }
 };
 
